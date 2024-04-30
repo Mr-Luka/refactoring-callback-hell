@@ -9,8 +9,35 @@
 
 const go = document.querySelector(".go");
 
+const wait = (ms = 0)=> new Promise(resolve=>(setTimeout(resolve, ms)));
 
+function animate(e){
+    const el = e.currentTarget;
+    el.textContent = "Go!"
+    wait(200)
+    .then(()=>{
+        el.classList.add("circle");
+        return wait(500)
+    })
+    .then(()=> {
+        el.classList.add("red")
+        return wait(250)
+    })
+    .then(()=>{
+        el.classList.remove("circle");
+        return wait(500)
+    })
+    .then(()=> {
+        el.classList.remove("red")
+        el.classList.add("purple");
+        return wait(500)
+    })
+    .then(()=>{
+        el.classList.add("timeOut")
+    })
+}
 
+go.addEventListener("click", animate)
 
 // go.addEventListener("clickxxx", function(e){
 //     const el = e.currentTarget;
